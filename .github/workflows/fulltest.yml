@@ -23,5 +23,5 @@ jobs:
       - name: Build EXILE
         run: |
           nix build \
-            '.#nixosConfigurations.EXILE.config.system.build.toplevel' \
+            '.#nixosConfigurations.HYPRNIX.config.system.build.toplevel' \
             --show-trace

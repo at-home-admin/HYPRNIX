@@ -21,5 +21,5 @@ jobs:
       - name: Evaluate EXILE
         run: |
           nix eval \
-            '.#nixosConfigurations.EXILE.config.system.build.toplevel' \
+            '.#nixosConfigurations.HYPRNIX.config.system.build.toplevel' \
             --show-trace
