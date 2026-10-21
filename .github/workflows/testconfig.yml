@@ -1,0 +1,25 @@
+name: Check NixOS configuration
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Check flake without building
+        run: nix flake check --no-build --show-trace
+
+      - name: Evaluate EXILE
+        run: |
+          nix eval \
+            '.#nixosConfigurations.EXILE.config.system.build.toplevel' \
+            --show-trace
