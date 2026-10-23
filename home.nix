@@ -58,7 +58,7 @@ in
       zreload = "source /home/bfoster/.zshrc";
       #breload = "source /home/bfoster/.bashrc";
       whosyourdaddy = "echo eat shite";
-      rebuildnix = "sudo nixos-rebuild switch --flake github:at-home-admin/nixosconfig#HYPRNIX --show-trace";
+      rebuildnix = "sudo nixos-rebuild switch --flake github:at-home-admin/HYPRNIX#HYPRNIX --show-trace";
       localrebuild = "sudo nixos-rebuild switch --flake ~/config#HYPRNIX";
       conf = "sudo nvim ~/.zshrc";
       devshell = "nix-shell --pure";
