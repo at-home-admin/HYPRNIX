@@ -241,7 +241,7 @@
     git
     magic-wormhole
     zsh
-   
+
     networkmanagerapplet
     lazydocker
     hyprpolkitagent
@@ -261,7 +261,10 @@
     "nix-command"
     "flakes"
   ];
-
+  # Install Leaf Markdown Preview
+  services.hedgedoc = {
+    enable = true;
+  };
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.gvfs.enable = true;
@@ -283,61 +286,61 @@
   };
   nix.optimise.automatic = true; # Optimise storage
   # Enable Automatic Upgrades and Turn Off Auto Reboot
- # system.autoUpgrade = {
- #   enable = true;
- #   flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
- #   dates = "Monday 5:00";
- #   randomizedDelaySec = "15min";
- #   operation = "switch";
- #   persistent = true;
- #   flags = [
- #     "--print-build-logs"
- #     "--commit-lock-file" # Automatically saves your updated flake.lock
- #   ];
- # };
- # # 2. Hook the notification triggers into the existing upgrade service
- # systemd.services = {
- #   "nixos-upgrade" = {
- #     unitConfig = {
- #       OnSuccess = "gotify-success@%N.service";
- #       OnFailure = "gotify-failure@%N.service";
- #     };
- #   };
+  # system.autoUpgrade = {
+  #   enable = true;
+  #   flake = "github:at-home-admin/nixosconfig#EXILE"; # Path to your configuration directory
+  #   dates = "Monday 5:00";
+  #   randomizedDelaySec = "15min";
+  #   operation = "switch";
+  #   persistent = true;
+  #   flags = [
+  #     "--print-build-logs"
+  #     "--commit-lock-file" # Automatically saves your updated flake.lock
+  #   ];
+  # };
+  # # 2. Hook the notification triggers into the existing upgrade service
+  # systemd.services = {
+  #   "nixos-upgrade" = {
+  #     unitConfig = {
+  #       OnSuccess = "gotify-success@%N.service";
+  #       OnFailure = "gotify-failure@%N.service";
+  #     };
+  #   };
 
- #   "gotify-success@" = {
- #     description = "Send Gotify success notification for %i";
- #     after = [ "network-online.target" ];
- #     wants = [ "network-online.target" ];
- #     serviceConfig = {
- #       environment = [
- #         "HOME=/root"
- #         "GOTIFY_CONFIG=/root/.gotify/cli.json"
- #       ];
- #     };
- #     script = ''
- #       sleep 45
- #       /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Succeeded" -p 10 \
- #         "The update completed successfully on $(cat /proc/sys/kernel/hostname) . It will run again Monday at or after 5 AM."
- #     '';
- #   };
+  #   "gotify-success@" = {
+  #     description = "Send Gotify success notification for %i";
+  #     after = [ "network-online.target" ];
+  #     wants = [ "network-online.target" ];
+  #     serviceConfig = {
+  #       environment = [
+  #         "HOME=/root"
+  #         "GOTIFY_CONFIG=/root/.gotify/cli.json"
+  #       ];
+  #     };
+  #     script = ''
+  #       sleep 45
+  #       /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Succeeded" -p 10 \
+  #         "The update completed successfully on $(cat /proc/sys/kernel/hostname) . It will run again Monday at or after 5 AM."
+  #     '';
+  #   };
 
- #   "gotify-failure@" = {
- #     description = "Send Gotify failure notification for %i";
- #     after = [ "network-online.target" ];
- #     wants = [ "network-online.target" ];
- #     serviceConfig = {
- #       environment = [
- #         "HOME=/root"
- #         "GOTIFY_CONFIG=/root/.gotify/cli.json"
- #       ];
- #     };
- #     script = ''
- #       sleep 45
- #       /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Failed!" -p 10 \
- #         "Alert: System update failed on $(cat /proc/sys/kernel/hostname). Check 'journalctl -u %i' for details."
- #     '';
- #   };
- # };
+  #   "gotify-failure@" = {
+  #     description = "Send Gotify failure notification for %i";
+  #     after = [ "network-online.target" ];
+  #     wants = [ "network-online.target" ];
+  #     serviceConfig = {
+  #       environment = [
+  #         "HOME=/root"
+  #         "GOTIFY_CONFIG=/root/.gotify/cli.json"
+  #       ];
+  #     };
+  #     script = ''
+  #       sleep 45
+  #       /etc/profiles/per-user/bfoster/bin/gotify push -t "NixOS Update Failed!" -p 10 \
+  #         "Alert: System update failed on $(cat /proc/sys/kernel/hostname). Check 'journalctl -u %i' for details."
+  #     '';
+  #   };
+  # };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
