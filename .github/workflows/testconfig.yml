@@ -1,7 +1,7 @@
 name: Check NixOS configuration
 
 on:
-  push:
+  
   pull_request:
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: Check flake without building
         run: nix flake check --no-build --show-trace
 
-      - name: Evaluate EXILE
+      - name: Evaluate HYPRNIX
         run: |
           nix eval \
             '.#nixosConfigurations.HYPRNIX.config.system.build.toplevel' \
